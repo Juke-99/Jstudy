@@ -22,10 +22,17 @@ dependencies {
 	compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.27'
 	// https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-server
 	compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: '2.27'
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.test-framework/jersey-test-framework-core
+	compile group: 'org.glassfish.jersey.test-framework', name: 'jersey-test-framework-core', version: '2.27'
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2
+	compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
 	
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    // https://mvnrepository.com/artifact/org.glassfish.jersey.test-framework.providers/jersey-test-framework-provider-grizzly2
+	testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version: '2.27'
+    
 }
 
 // In this section you declare where to find the dependencies of your project

@@ -1,18 +1,17 @@
 package study.jersey.post.optionandhashmap;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 
 import java.util.logging.Logger;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Form;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
-import org.glassfish.jersey.test.spi.TestContainerFactory;
 import org.junit.Test;
 
 public class HashMapPOSTTest extends JerseyTest {
@@ -40,15 +39,34 @@ public class HashMapPOSTTest extends JerseyTest {
 		Form form3 = new Form();
 		form3.param("value", "");
 		
+		//Response getRes = target("/hashmap")
+		//		.request()
+		//		.get();
+		
 		Response res = target("/hashmap")
 				.request()
+				.header("Content-Type", MediaType.APPLICATION_FORM_URLENCODED)
 				.post(Entity.form(form1));
 		
 		//post(Entity.entity(formParams, MediaType.APPLICATION_FORM_URLENCODED_TYPE), String.class);
 		
-		//String str = res.readEntity(String.class);
-		//log.info(str);
+		String str = res.readEntity(String.class);
+		log.info("Entity : " + str);
 		
-		assertThat(res.getStatus(), equalTo(200));
+		assertEquals(200, res.getStatus());
+	}
+	
+	@Test
+	public void testGetValue() {
+		Logger log = Logger.getLogger("HashMapPOSTTest LOG");
+		
+		Response res = target("/hashmap")
+				.request()
+				.get();
+		
+		String str = res.readEntity(String.class);
+		log.info("Entity : " + str);
+		
+		assertEquals(200, res.getStatus());
 	}
 }
