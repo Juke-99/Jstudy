@@ -26,6 +26,8 @@ dependencies {
 	compile group: 'org.glassfish.jersey.test-framework', name: 'jersey-test-framework-core', version: '2.27'
 	// https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2
 	compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
+	// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
+	compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '9.0.14'
 	
 
     // Use JUnit test framework
