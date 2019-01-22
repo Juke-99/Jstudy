@@ -28,13 +28,13 @@ dependencies {
 	compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
 	// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina
 	compile group: 'org.apache.tomcat', name: 'tomcat-catalina', version: '9.0.14'
-	
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     // https://mvnrepository.com/artifact/org.glassfish.jersey.test-framework.providers/jersey-test-framework-provider-grizzly2
 	testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-grizzly2', version: '2.27'
-    
+	// https://mvnrepository.com/artifact/org.mockito/mockito-core
+	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
 }
 
 // In this section you declare where to find the dependencies of your project
