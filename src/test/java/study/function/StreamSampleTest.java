@@ -3,20 +3,28 @@ package study.function;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 
 public class StreamSampleTest {
-	String[] result = {"one", "two", "three", "1", "2", "3", "o", "t", "h"};
+	List<String> result;
+	StreamSample ss = new StreamSample();
+	
 	Logger logger = Logger.getLogger("StreamSampleTest");
 
 	@Test
 	public void testGetStreamingList() {
-		StreamSample ss = new StreamSample();
+		result = Arrays.asList("one", "two", "three", "1", "2", "3", "o", "t", "h");
 		
-		ss.getStreamingList().forEach(item -> {
-			logger.info(item);
-		});
+		assertThat(ss.getStreamingList(), is(result));
+	}
+	
+	@Test
+	public void testDisplayValues() {
+		ss.displayValues();
 	}
 }
