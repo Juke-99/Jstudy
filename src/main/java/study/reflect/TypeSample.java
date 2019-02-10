@@ -9,7 +9,6 @@ public class TypeSample {
 	List<Error> errorList = new ArrayList<>();
 	
 	public Type getActualType() {
-		//ParameterizedType types = stringList.getClass()
 		return null;
 	}
 }
