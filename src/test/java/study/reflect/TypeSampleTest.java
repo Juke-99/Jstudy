@@ -1,10 +1,14 @@
 package study.reflect;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.lang.reflect.WildcardType;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.util.IntegerSequence;
 import org.junit.Test;
 
 import com.google.common.reflect.TypeToken;
@@ -34,5 +38,18 @@ public class TypeSampleTest extends ArrayList<String> {
 		}.getType();
 		
 		assertThat((Class<?>) (((ParameterizedType) stringType).getRawType())).isSameAs(List.class);
+		
+		Type arrayType = new TypeToken<String[]>() {
+			private static final long serialVersionUID = 1L;
+		}.getType();
+		
+//		Type componentType = ((GenericArrayType) arrayType).getGenericComponentType();
+//		assertThat(Array.newInstance((Class<?>) componentType, 0).getClass()).isSameAs(String[].class);
+		
+		Type wildType = ((ParameterizedType) new TypeToken<List<? extends IntegerSequence>>() {
+			private static final long serialVersionUID = 1L;
+		}.getType()).getActualTypeArguments()[0];
+		
+		assertThat(((WildcardType) wildType).getUpperBounds()[0]).isSameAs(IntegerSequence.class);
 	}
 }
