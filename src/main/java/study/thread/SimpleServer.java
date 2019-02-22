@@ -7,10 +7,12 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,8 +24,12 @@ public class SimpleServer {
     static int port;
     private ExecutorService executor;
     private ServerSocket serverSocket;
+    private boolean started;
     
     public synchronized void start() throws IOException {
+        if (started) throw new IllegalStateException("start() already called");
+        started = true;
+        
         InetSocketAddress inetSocketAddress = new InetSocketAddress(InetAddress.getByName("localhost"), 0);
         executor = Executors.newCachedThreadPool(Util.threadFactory("SimpleServer", false));
         serverSocket = ServerSocketFactory.getDefault().createServerSocket();
@@ -42,6 +48,13 @@ public class SimpleServer {
                     accept();
                 } catch (Throwable e) {
                     logger.log(Level.WARNING, SimpleServer.this + " failed unexpectedly", e);
+                }
+                
+                Util.closeQuietly(serverSocket);
+                
+                for (Iterator<Socket> s = openClientSockets.iterator(); s.hasNext(); ) {
+                    Util.closeQuietly(s.next());
+                    s.remove();
                 }
             
                 executor.shutdown();
@@ -86,8 +99,19 @@ public class SimpleServer {
     }
     
     public synchronized void shutdown() throws IOException {
+        if(!started) return;
+        if (serverSocket == null) throw new IllegalStateException("shutdown() before start()");
+        
         logger.info("Server shutdown...");
         serverSocket.close();
+        
+        try {
+            if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
+              throw new IOException("Gave up waiting for executor to shut down");
+            }
+        } catch (InterruptedException e) {
+            throw new AssertionError();
+        }
     }
     
     @Override

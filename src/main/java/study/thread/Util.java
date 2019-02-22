@@ -1,5 +1,7 @@
 package study.thread;
 
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.ThreadFactory;
 
 public class Util {
@@ -10,4 +12,26 @@ public class Util {
 			return thread;
 		};
 	}
+	
+	public static void closeQuietly(ServerSocket serverSocket) {
+	    if (serverSocket != null) {
+	        try {
+	            serverSocket.close();
+	        } catch (RuntimeException rethrown) {
+	            throw rethrown;
+	        } catch (Exception ignored) {
+	        }
+	    }
+	}
+	
+	public static void closeQuietly(Socket socket) {
+	    if (socket != null) {
+	        try {
+	            socket.close();
+	        } catch (RuntimeException rethrown) {
+	            throw rethrown;
+	        } catch (Exception ignored) {
+          }
+        }
+    }
 }
