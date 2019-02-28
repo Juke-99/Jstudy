@@ -12,7 +12,7 @@ public abstract class NamedRunnable implements Runnable {
 	}
 	
 	@Override
-	public void run() {
+	public final void run() {
 		logger.info("run server");
 		String previousThread = Thread.currentThread().getName();
 		Thread.currentThread().setName(name);

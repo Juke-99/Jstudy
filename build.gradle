@@ -36,6 +36,8 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.mockito/mockito-core
 	testCompile group: 'org.mockito', name: 'mockito-core', version: '2.23.4'
 	testCompile group: 'org.assertj', name: 'assertj-core', version: '3.11.1'
+	// https://mvnrepository.com/artifact/com.sun.net.httpserver/http
+    testCompile group: 'com.sun.net.httpserver', name: 'http', version: '20070405'
 }
 
 // In this section you declare where to find the dependencies of your project
@@ -43,4 +45,8 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+}
+
+application {
+    mainClassName = 'study.webserver.SimpleWebServer'
 }

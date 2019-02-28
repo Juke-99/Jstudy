@@ -9,7 +9,7 @@ public class SimpleServerTest {
     SimpleServer server = new SimpleServer();
     
     @After
-    public void complete() throws IOException {
+    public void toDown() throws IOException {
         server.shutdown();
     }
 
