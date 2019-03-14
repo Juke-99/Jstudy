@@ -1,0 +1,23 @@
+# HTML file
+*.html
+
+# JS file
+*.js
+
+# CSS file
+*.css
+
+# class file
+*.class
+*.jar
+
+# project folders
+.vscode/
+.gradle/
+.settings/
+
+.DS_Store
+.classPath
+.project
+gradlew
+gradlew.bat
