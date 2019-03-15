@@ -46,7 +46,3 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
-
-application {
-    mainClassName = 'study.webserver.SimpleWebServer'
-}

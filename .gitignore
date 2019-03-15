@@ -12,9 +12,13 @@
 *.jar
 
 # project folders
-.vscode/
-.gradle/
-.settings/
+.vscode
+.gradle
+.settings
+bin
+build
+src/main/java/paiza/
+src/test/java/paiza/
 
 .DS_Store
 .classPath
